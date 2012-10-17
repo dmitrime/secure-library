@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Library" default="compile" basedir=".">
+	<property name="project.dir.lib" location="lib" />
+	<property name="project.dir.src" location="src" />
+	<property name="project.dir.classes" location="bin" />
+
+	<path id="classpath.compile">
+		<fileset dir="${project.dir.lib}" includes="**/*.jar" />
+	</path>
+
+	<path id="classpath.run">
+		<fileset dir="${project.dir.lib}" includes="**/*.jar" />
+		<pathelement path="${project.dir.classes}" />
+	</path>
+
+	<target name="compile">
+		<mkdir dir="${project.dir.classes}" />
+		<javac destdir="${project.dir.classes}" classpathref="classpath.compile" source="1.6" target="1.6" fork="yes" encoding="UTF-8">
+			<src path="${project.dir.src}" />
+		</javac>
+	</target>
+
+	<target name="clean">
+		<delete dir="${project.dir.classes}" />
+	</target>
+
+	<target name="run-server" depends="compile">
+		<java classname="ee.ut.cs.courses.appliedcrypto.library.LibraryServer" fork="yes" classpathref="classpath.run">
+			<arg line="8888" />
+		</java>
+	</target>
+
+	<target name="run-client" depends="compile">
+		<java classname="ee.ut.cs.courses.appliedcrypto.lender.LenderClient" fork="yes" classpathref="classpath.run">
+			<arg line="localhost" />
+			<arg line="8888" />
+		</java>
+	</target>
+
+	<target name="run-judge" depends="compile">
+		<java classname="ee.ut.cs.courses.appliedcrypto.judge.JudgeResolution" fork="yes" classpathref="classpath.run">
+			<arg line="evidence/library.evidence" />
+			<arg line="evidence/lender.evidence" />
+		</java>
+	</target>
+
+	<target name="keystore-gen" depends="compile">
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.Keystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/private/cli_signkey.pem" />
+			<arg line="ca/newcerts/cli_sign.crt" />
+			<arg line="password" />
+			<arg line="lender-sign" />
+			<arg line="keystore/lender-sign.jks" />
+			<arg line="password" />
+			<arg line="ca/cacert.pem" />
+		</java>
+	</target>
+
+	<target name="trust-gen" depends="compile">
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.TrustKeystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/cacert.pem" />
+			<arg line="ca/newcerts/cli_ssl.crt" />
+			<arg line="ca/newcerts/lib_ssl.crt" />
+			<arg line="password" />
+			<arg line="keystore/trust-ssl.jks" />
+		</java>
+	</target>
+	
+	<target name="gen-all-keystores" depends="compile">
+		<!-- lender-sign -->
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.Keystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/private/cli_signkey.pem" />
+			<arg line="ca/newcerts/cli_sign.crt" />
+			<arg line="password" />
+			<arg line="lender-sign" />
+			<arg line="keystore/lender-sign.jks" />
+			<arg line="password" />
+			<arg line="ca/cacert.pem" />
+		</java>
+		<!-- library-sign -->
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.Keystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/private/lib_signkey.pem" />
+			<arg line="ca/newcerts/lib_sign.crt" />
+			<arg line="password" />
+			<arg line="library-sign" />
+			<arg line="keystore/library-sign.jks" />
+			<arg line="password" />
+			<arg line="ca/cacert.pem" />
+		</java>
+		<!-- lender-ssl -->
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.Keystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/private/cli_sslkey.pem" />
+			<arg line="ca/newcerts/cli_ssl.crt" />
+			<arg line="password" />
+			<arg line="lender-ssl" />
+			<arg line="keystore/lender-ssl.jks" />
+			<arg line="password" />
+			<arg line="ca/cacert.pem" />
+		</java>
+		<!-- library-ssl -->
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.Keystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/private/lib_sslkey.pem" />
+			<arg line="ca/newcerts/lib_ssl.crt" />
+			<arg line="password" />
+			<arg line="library-ssl" />
+			<arg line="keystore/library-ssl.jks" />
+			<arg line="password" />
+			<arg line="ca/cacert.pem" />
+		</java>
+		<!-- trust-ssl -->
+		<java classname="ee.ut.cs.courses.appliedcrypto.util.TrustKeystore" fork="yes" classpathref="classpath.run">
+			<arg line="ca/cacert.pem" />
+			<arg line="ca/newcerts/cli_ssl.crt" />
+			<arg line="ca/newcerts/lib_ssl.crt" />
+			<arg line="password" />
+			<arg line="keystore/trust-ssl.jks" />
+		</java>
+	</target>
+
+</project>

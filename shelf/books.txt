@@ -1,0 +1,7 @@
+David Hook|Beginning Cryptography with Java|Wrox|2005
+Bruce Schneier|Applied Cryptography: Protocols, Algorithms, and Source Code in C|Wiley|1996
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein|Introduction to Algorithms, Third Edition|The MIT Press|2009
+M. Tim Jones|AI Application Programming|Charles River Media|2005
+James Gosling|Teach yourself Java in 2 hours|Sun Press|2011
+Bruce Schneier|Teach yourself Cryptography in 10 minutes|Wrox|2012
+Dan Green|How to Draw 101 Animals|Top That! Kids|2004

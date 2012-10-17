@@ -1,0 +1,5 @@
+Rolling Stone|1967|1
+Linux Journal|2007|123
+Computerworld|2009|324
+Time Magazine|2010|1501
+People|2001|567

@@ -1,0 +1,4 @@
+The following jar files should be present in this directory:
+bcmail-jdk16-145.jar 
+bcprov-jdk16-145.jar 
+log4j-1.2.15.jar
