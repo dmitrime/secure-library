@@ -62,11 +62,17 @@ checks the server's certificate in the same way.
 Client commands
 ===
 Available client commands:
+
 (s)earch [text|year] 	 - search the library for items
+
 (b)orrow n           	 - borrow item n from the found items list
+
 (r)eturn n           	 - return item n from the borrowed items list
+
 (l)ist               	 - list borrowed items
+
 (h)elp               	 - print this help
+
 (q)uit               	 - disconnect and quit
 
 Logging
