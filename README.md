@@ -19,15 +19,22 @@ The CA's certificate is by default called "cacert.pem" in the "ca" directory.
 certificates signed by the CA (both SSL and signature certs).
 
 The new certificates can be created with openssl in a standard way:
+
 cd ca
+
 openssl req -new -keyout private/[KEY_NAME].pem -config ./openssl.conf -out [REQ_NAME].pem -sha1 -days 365
+
 openssl ca -config ./openssl.conf -extensions [v3_req|ssl_server|ssl_client] -policy policy_match \
+
         -out newcerts/[CERT_NAME].crt -infiles [REQ_NAME].pem
+
 Here the extension "v3_req" is used to create certificates for signing data, 
 "ssl_server" is for SSL server and "ssl_client" is for SSL clients. 
 
 The default CRL file is located in "ca/crl/ca.crl". It can be generate using:
+
 cd ca
+
 openssl ca -config ./openssl.conf -gencrl -out crl/ca.crl
 
 The default password for private keys is "password".
@@ -36,10 +43,15 @@ Keystores
 ===
 The library server and the client use java keystores to load keys and certificates.
 There are 5 keystores in "keystores" directory:
+
 library-ssl.jks		- 1 PrivateKeyEntry "library-ssl" and 1 trustedCertEntry "root"
+
 trust-ssl.jks		- 3 trustedCertEntry "lender", "library," and "root"
+
 lender-sign.jks		- 1 PrivateKeyEntry "lender-sign" and 1 trustedCertEntry "root"
+
 library-sign.jks 	- 1 PrivateKeyEntry "library-sign" and 1 trustedCertEntry "root"
+
 lender-ssl.jks		- 1 PrivateKeyEntry "lender-ssl" and 1 trustedCertEntry "root"
 					  OPTIONAL, if present, 2-way authentication is used
 All keystores have a trustedCertEntry with alias "root" with the CA's certificate. 
