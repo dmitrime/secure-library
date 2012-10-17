@@ -20,11 +20,11 @@ certificates signed by the CA (both SSL and signature certs).
 
 The new certificates can be created with openssl in a standard way:
 
-cd ca
+        cd ca
 
-openssl req -new -keyout private/[KEY_NAME].pem -config ./openssl.conf -out [REQ_NAME].pem -sha1 -days 365
+        openssl req -new -keyout private/[KEY_NAME].pem -config ./openssl.conf -out [REQ_NAME].pem -sha1 -days 365
 
-openssl ca -config ./openssl.conf -extensions [v3_req|ssl_server|ssl_client] -policy policy_match \
+        openssl ca -config ./openssl.conf -extensions [v3_req|ssl_server|ssl_client] -policy policy_match \
 
         -out newcerts/[CERT_NAME].crt -infiles [REQ_NAME].pem
 
@@ -33,9 +33,9 @@ Here the extension "v3_req" is used to create certificates for signing data,
 
 The default CRL file is located in "ca/crl/ca.crl". It can be generate using:
 
-cd ca
+        cd ca
 
-openssl ca -config ./openssl.conf -gencrl -out crl/ca.crl
+        openssl ca -config ./openssl.conf -gencrl -out crl/ca.crl
 
 The default password for private keys is "password".
 
@@ -53,7 +53,7 @@ lender-sign.jks		- 1 PrivateKeyEntry "lender-sign" and 1 trustedCertEntry "root"
 library-sign.jks 	- 1 PrivateKeyEntry "library-sign" and 1 trustedCertEntry "root"
 
 lender-ssl.jks		- 1 PrivateKeyEntry "lender-ssl" and 1 trustedCertEntry "root"
-					  OPTIONAL, if present, 2-way authentication is used
+					  (OPTIONAL, if present, 2-way authentication is used)
 All keystores have a trustedCertEntry with alias "root" with the CA's certificate. 
 The default password for all keystores is "password".
 
